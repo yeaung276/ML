@@ -4,6 +4,8 @@ import numpy as np
 mat1 = np.array([[1,3,4],[2, 4 ,5]])
 mat2 = np.array([[1,3,4],[2, 4 ,5]])
 mat3 = np.array([[[1,3,4],[2, 4 ,5]],[[1,3,4],[2, 4 ,5]]])
+mat4 = np.array([1,2,3,4,5,6,7,8,9,0,1])
+mat5 = np.array([[1,2,3],[4,5,6],[7,8,9]])
 #net = neural_net.neural_net();
 #print(net.sigmoid(mat));
 #print(mat1.dot(mat2))
@@ -21,4 +23,8 @@ mat3 = np.array([[[1,3,4],[2, 4 ,5]],[[1,3,4],[2, 4 ,5]]])
 #print(round(0.22222222,3))
 #print(mat1.reshape(1,6))
 #print(mat1)
-print(np.array([1,2,3]).shape)
+#print(np.array([1,2,3]).shape)
+#print(mat4[1:5])
+#print(np.log(mat1))
+print(mat5)
+print(mat5[:,1:])
