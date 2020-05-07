@@ -53,8 +53,12 @@ class neural_net():
 
         return J
 
-    def backprop_nn(self):
-        pass
+    def backprop_nn(self,data,y):
+        h = self.forwardprop_nn(data)
+        dalta[-1] = np.subtract(h,y)
+        for i,d in enumerate(reversed(self.__dalta)):
+            tmp = np.dot(self.__weights[-i-1].transpose(),d)
+            tmp = tmp[1:,:]
     
     def forwardprop_nn(self,data):
         #perform forward propagation 

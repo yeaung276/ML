@@ -13,6 +13,7 @@ weight = [weight1,weight2]
 NN = neural_net.neural_net({'architecture': [10,1],'rand_range': 0.7})
 for w in NN.get_weights():
     assert (w>-0.7).all() and (w<0.7).all() , 'rand range implementation error'
+    
 NN = neural_net.neural_net({'architecture': [400,25,1]})
 assert len(NN.get_activations()) == 3 , 'error in initialization activation'
 assert (NN.get_weights()[0].shape == (25,401)) & (NN.get_weights()[1].shape == (1,26)) , 'error in initializing weight'

@@ -6,6 +6,7 @@ mat2 = np.array([[1,3,4],[2, 4 ,5]])
 mat3 = np.array([[[1,3,4],[2, 4 ,5]],[[1,3,4],[2, 4 ,5]]])
 mat4 = np.array([1,2,3,4,5,6,7,8,9,0,1])
 mat5 = np.array([[1,2,3],[4,5,6],[7,8,9]])
+a = [1,2,3]
 #net = neural_net.neural_net();
 #print(net.sigmoid(mat));
 #print(mat1.dot(mat2))
@@ -30,5 +31,10 @@ mat5 = np.array([[1,2,3],[4,5,6],[7,8,9]])
 #print(mat5[:,1:])
 #print((np.random.rand(5,1) * 2 * 0.5) - 0.5)
 #print((mat1 * 2 * 0.5) - 0.5)
-gg={ 'a' : 'a' }
-print('a' in gg)
+#gg={ 'a' : 'a' }
+#print('a' in gg)
+#print(mat5)
+#print(mat5[1:,:])
+b=reversed(a)
+print(b)
+print(a)
