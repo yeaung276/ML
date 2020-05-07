@@ -5,9 +5,12 @@ class neural_net():
     def __init__(self,config):
         self.__no_layers = len(config['architecture'])
         self.__training_data = 0
-        self.__weights = [ np.zeros((config['architecture'][n+1],config['architecture'][n]+1)) for n in range(self.__no_layers-1) ]
         self.__activations= [ np.zeros((n,1)) for n in config['architecture'] ]
         self.__dalta=[ np.zeros((n,1)) for n in config['architecture'] ]
+        if 'rand_range' in config:
+            self.__weights = [ (np.random.rand(config['architecture'][n+1],config['architecture'][n]+1)*2*config['rand_range'])-config['rand_range'] for n in range(self.__no_layers-1) ]
+        else:
+            self.__weights = [ np.random.rand(config['architecture'][n+1],config['architecture'][n]+1) for n in range(self.__no_layers-1) ]
     
     def __sigmoid(self,x):
         #sigmoid for calculting the activation value
