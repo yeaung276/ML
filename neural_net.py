@@ -31,6 +31,7 @@ class neural_net():
         #calculate dalta of specified layer
         tmp = self.__weights[layer].transpose().dot(self.__dalta[layer+1])
         tmp = tmp[1:,:]
+        #error : activation is value before taking sigmoid, self.__activation is sigmoid value
         self.__dalta[layer] = np.multiply(tmp,self.__sigmoid_grad(self.__activations[layer]))
         return
 
@@ -87,13 +88,12 @@ class neural_net():
 
         return grad
 
-            
-
     def backprop_nn(self,data,y):
         h = self.forwardprop_nn(data)
         self.__dalta[-1] = np.subtract(h,y)
         for layer in reversed(range(self.__no_layers-1)):
             self.__calculate_dalta(layer)
+
         return
     
     def forwardprop_nn(self,data):

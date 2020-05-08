@@ -55,5 +55,7 @@ assert (NN.test_grad(tD).round(6)==np.array([0.196612,0.235004,0.250000,0.235004
 
 #testing backpropagation
 NN.backprop_nn(X,y_mod)
-h = NN.test__grad(theta,X,y_mod,0)
-print(h.shape)
+print(NN.test_dalta()[1].sum())
+#assert (round(NN.test_dalta()[2][0,0],8) == 0.00011266 ) and (round(NN.test_dalta()[1][5,5],8) == -0.000037133), 'error in back propagation'
+#h = NN.test__grad(theta,X,y_mod,0)
+#print(h[0])
