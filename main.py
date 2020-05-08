@@ -40,3 +40,5 @@ a = [1,2,3]
 #b=reversed(a)
 #print(b)
 #print(a)
+#print([None] * 5)
+print(np.add(mat1,mat2))

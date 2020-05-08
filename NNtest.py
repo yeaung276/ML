@@ -55,11 +55,5 @@ assert (NN.test_grad(tD).round(6)==np.array([0.196612,0.235004,0.250000,0.235004
 
 #testing backpropagation
 NN.backprop_nn(X,y_mod)
-d = NN.test_dalta()
-a = NN.get_activations()
-print('dalta')
-for i in d:
-    print(i.shape)
-print('activations')
-for i in a:
-    print(i.shape)
+h = NN.test__grad(theta,X,y_mod,0)
+print(h.shape)

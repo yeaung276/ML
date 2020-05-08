@@ -61,7 +61,33 @@ class neural_net():
         return J
 
     def __grad(self,theta,data,y,lam):
-        pass;
+        #reshaping input theta and setting it
+        idx_start = 0
+        idx_end = 0
+        for n in range(self.__no_layers - 1 ):
+            i,j = self.__weights[n].shape
+            idx_end = idx_start + (i * j)
+            self.__weights[n] = theta[idx_start:idx_end].reshape(i,j)
+            idx_start = idx_end
+
+        m,n = data.shape
+        self.backprop_nn(data,y)
+        D = []
+        for layer in range(self.__no_layers-1):
+            tmp = (1/m) * self.__dalta[layer+1].dot(np.c_[np.ones(m),self.__activations[layer].transpose()])
+            #regularization
+            i,j = self.__weights[layer].shape
+            reg = (lam/m) * np.c_[np.zeros(i),self.__weights[layer][:,1:]]
+            D.append(  np.add(tmp,reg)  )
+
+        #unrolling vectors
+        grad = np.array([])
+        for n in D:
+            grad = np.concatenate([grad,n.flatten()],axis = 0)
+
+        return grad
+
+            
 
     def backprop_nn(self,data,y):
         h = self.forwardprop_nn(data)
@@ -117,6 +143,9 @@ class neural_net():
 
     def test_dalta(self):
         return self.__dalta
+
+    def test__grad(self,theta,data,y,lam):
+        return self.__grad(theta,data,y,lam)
 
 
 class config():
