@@ -27,6 +27,13 @@ class neural_net():
         self.__activations[layer] = self.__sigmoid(self.__weights[layer-1].dot(np.r_[np.ones((1,j)),self.__activations[layer-1]]))
         return
 
+    def __calculate_dalta(self,layer):
+        #calculate dalta of specified layer
+        tmp = self.__weights[layer].transpose().dot(self.__dalta[layer+1])
+        tmp = tmp[1:,:]
+        self.__dalta[layer] = np.multiply(tmp,self.__sigmoid_grad(self.__activations[layer]))
+        return
+
     def _cost(self,theta,data,y,lam):
         #reshaping input theta and setting it
         idx_start = 0
@@ -53,12 +60,15 @@ class neural_net():
 
         return J
 
+    def __grad(self,theta,data,y,lam):
+        pass;
+
     def backprop_nn(self,data,y):
         h = self.forwardprop_nn(data)
-        dalta[-1] = np.subtract(h,y)
-        for i,d in enumerate(reversed(self.__dalta)):
-            tmp = np.dot(self.__weights[-i-1].transpose(),d)
-            tmp = tmp[1:,:]
+        self.__dalta[-1] = np.subtract(h,y)
+        for layer in reversed(range(self.__no_layers-1)):
+            self.__calculate_dalta(layer)
+        return
     
     def forwardprop_nn(self,data):
         #perform forward propagation 
@@ -78,6 +88,9 @@ class neural_net():
 
 
     def Train(self):
+        pass
+
+    def architecture(self):
         pass
 
     def get_weights(self):
@@ -101,6 +114,9 @@ class neural_net():
 
     def test_grad(self,x):
         return self.__sigmoid_grad(x)
+
+    def test_dalta(self):
+        return self.__dalta
 
 
 class config():

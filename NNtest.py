@@ -13,7 +13,7 @@ weight = [weight1,weight2]
 NN = neural_net.neural_net({'architecture': [10,1],'rand_range': 0.7})
 for w in NN.get_weights():
     assert (w>-0.7).all() and (w<0.7).all() , 'rand range implementation error'
-    
+
 NN = neural_net.neural_net({'architecture': [400,25,1]})
 assert len(NN.get_activations()) == 3 , 'error in initialization activation'
 assert (NN.get_weights()[0].shape == (25,401)) & (NN.get_weights()[1].shape == (1,26)) , 'error in initializing weight'
@@ -52,3 +52,14 @@ assert round(NN.test_cost(theta,X,y_mod,1),3)==0.384, 'should be 0.384'
 #testing sigmoid gradient
 tD = np.array([-1,-0.5,0,0.5,1])
 assert (NN.test_grad(tD).round(6)==np.array([0.196612,0.235004,0.250000,0.235004,0.196612])).all() ,'error in sigmoid gradient'
+
+#testing backpropagation
+NN.backprop_nn(X,y_mod)
+d = NN.test_dalta()
+a = NN.get_activations()
+print('dalta')
+for i in d:
+    print(i.shape)
+print('activations')
+for i in a:
+    print(i.shape)

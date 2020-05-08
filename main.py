@@ -9,7 +9,9 @@ mat5 = np.array([[1,2,3],[4,5,6],[7,8,9]])
 a = [1,2,3]
 #net = neural_net.neural_net();
 #print(net.sigmoid(mat));
-#print(mat1.dot(mat2))
+#print(mat1)
+#print(mat1.dot(mat2.transpose()))
+#print(mat1)
 #print(1 * (mat1 > 3))
 #print(np.c_[[1 ,2],mat1])
 #print(mat1.argmax(axis=0))
@@ -35,6 +37,6 @@ a = [1,2,3]
 #print('a' in gg)
 #print(mat5)
 #print(mat5[1:,:])
-b=reversed(a)
-print(b)
-print(a)
+#b=reversed(a)
+#print(b)
+#print(a)
