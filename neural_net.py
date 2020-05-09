@@ -6,6 +6,7 @@ class neural_net():
         self.__no_layers = len(config['architecture'])
         self.__training_data = 0
         self.__activations= [ np.zeros((n,1)) for n in config['architecture'] ]
+        self.__a= [ np.zeros((n,1)) for n in config['architecture'] ]
         self.__dalta=[ np.zeros((n,1)) for n in config['architecture'] ]
         if 'rand_range' in config:
             self.__weights = [ (np.random.rand(config['architecture'][n+1],config['architecture'][n]+1)*2*config['rand_range'])-config['rand_range'] for n in range(self.__no_layers-1) ]
@@ -24,7 +25,8 @@ class neural_net():
     def __calculate_activation(self,layer):
         #calculate the activation of specified layer
         (i,j) = self.__activations[layer - 1].shape
-        self.__activations[layer] = self.__sigmoid(self.__weights[layer-1].dot(np.r_[np.ones((1,j)),self.__activations[layer-1]]))
+        self.__a[layer] = self.__weights[layer-1].dot(np.r_[np.ones((1,j)),self.__activations[layer-1]])
+        self.__activations[layer] = self.__sigmoid(self.__a[layer])
         return
 
     def __calculate_dalta(self,layer):
@@ -32,7 +34,7 @@ class neural_net():
         tmp = self.__weights[layer].transpose().dot(self.__dalta[layer+1])
         tmp = tmp[1:,:]
         #error : activation is value before taking sigmoid, self.__activation is sigmoid value
-        self.__dalta[layer] = np.multiply(tmp,self.__sigmoid_grad(self.__activations[layer]))
+        self.__dalta[layer] = np.multiply(tmp,self.__sigmoid_grad(self.__a[layer]))
         return
 
     def _cost(self,theta,data,y,lam):
