@@ -41,4 +41,9 @@ a = [1,2,3]
 #print(b)
 #print(a)
 #print([None] * 5)
-print(np.add(mat1,mat2))
+#print(np.add(mat1,mat2))
+import time
+
+for i in range(100):
+    time.sleep(0.1)
+    print('Downloading File FooFile.txt [%d] [%d]\r'%(i ,i), end="")

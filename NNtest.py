@@ -58,3 +58,11 @@ NN.backprop_nn(X,y_mod)
 assert round(NN.test_dalta()[1].sum(),4)==7.1664 and round(NN.test_dalta()[2].sum(),3)==23.235 , 'error in calculating dalta'
 h = NN.test__grad(theta,X,y_mod,0)
 assert round(h.sum(),6)==0.026047 , 'error in calculating grad'
+
+h = NN.test__grad(theta,X,y_mod,1)
+assert round(h.sum(),7)==0.0099559 , 'error in calculating grad with regularization'
+
+#testint train method
+NN1 = neural_net.neural_net({'architecture': [400,25,10],'rand_range': 0.12})
+r = NN1.Train(X,y_mod,1)
+print('training accencury: {}% '.format(((NN1.predict(X)['predict_index'] + 1).reshape(5000,1) == y).mean() * 100))

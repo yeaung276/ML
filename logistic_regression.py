@@ -3,6 +3,7 @@ import scipy.optimize as op
 
 class Logistic_regression():
     def __init__(self,no_feature):
+        self.__j=0
         self.__theta = np.zeros([1,no_feature])
 
     def __sigmoid(self,x):
@@ -30,6 +31,8 @@ class Logistic_regression():
         regualrization = np.square(regualrization)
 
         J = (-1/m) * cost.sum() + (lam/(2*m)) * regualrization.sum()
+        
+        self.__J = J
 
         return J
 
@@ -52,15 +55,25 @@ class Logistic_regression():
 
 
     def Train(self,data,y,lam):
+        print('Training Model......')
+        self.__iter = 0
         Result = op.minimize(
                 fun = self.__cost,
                 x0 = self.__theta.copy(),
                 args = (data,y,lam),
                 method = 'BFGS',
                 jac = self.__grad,
-                options = { 'maxiter': 500,'disp': True })
+                options = { 'maxiter': 500,'disp': True },
+                callback=self.__callback
+                )
         self.__theta = Result.x.reshape(self.__theta.shape)
         return Result
+
+    def __callback(self,xi):
+        i=self.__J
+        j=self.__iter
+        print('iter: [%d] cost: [%f]\r'%(j,i), end="")
+        self.__iter+=1
 
 
     def get_weight(self):

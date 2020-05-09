@@ -1,8 +1,10 @@
 import numpy as np
+import scipy.optimize as op
 
 class neural_net():
     
     def __init__(self,config):
+        self.__J = 0
         self.__no_layers = len(config['architecture'])
         self.__training_data = 0
         self.__activations= [ np.zeros((n,1)) for n in config['architecture'] ]
@@ -37,7 +39,7 @@ class neural_net():
         self.__dalta[layer] = np.multiply(tmp,self.__sigmoid_grad(self.__a[layer]))
         return
 
-    def _cost(self,theta,data,y,lam):
+    def __cost(self,theta,data,y,lam):
         #reshaping input theta and setting it
         idx_start = 0
         idx_end = 0
@@ -60,6 +62,7 @@ class neural_net():
             regualrization += np.square(w[:,1:].copy()).sum()
         
         J = ( (-1/m) * cost.sum() ) + ( lam/(2*m) ) * regualrization
+        self.__J = J
 
         return J
 
@@ -115,8 +118,40 @@ class neural_net():
 
 
 
-    def Train(self):
-        pass
+    def Train(self,data,y,lam):
+        print('Training neural network......')
+        theta = np.array([])
+        for n in self.__weights:
+            theta = np.concatenate([theta,n.flatten()],axis = 0) 
+        
+        self.__iter = 0
+
+        Result = op.fmin_cg(
+            f=self.__cost,
+            x0=theta,
+            fprime=self.__grad,
+            args=(data,y,lam),
+            maxiter=100,
+            full_output=True,
+            disp=True,
+            callback=self.__callback
+        )
+
+        idx_start = 0
+        idx_end = 0
+        for n in range(self.__no_layers - 1 ):
+            i,j = self.__weights[n].shape
+            idx_end = idx_start + (i * j)
+            self.__weights[n] = Result[0][idx_start:idx_end].reshape(i,j)
+            idx_start = idx_end
+        
+        return Result
+
+    def __callback(self,xi):
+        i=self.__J
+        j=self.__iter
+        print('iter: [%d] cost: [%f]\r'%(j,i), end="")
+        self.__iter+=1
 
     def architecture(self):
         pass
@@ -138,7 +173,7 @@ class neural_net():
         return self.__no_layers
 
     def test_cost(self,theta,data,y,lam):
-        return self._cost(theta,data,y,lam)
+        return self.__cost(theta,data,y,lam)
 
     def test_grad(self,x):
         return self.__sigmoid_grad(x)
