@@ -64,5 +64,6 @@ assert round(h.sum(),7)==0.0099559 , 'error in calculating grad with regularizat
 
 #testint train method
 NN1 = neural_net.neural_net({'architecture': [400,25,10],'rand_range': 0.12})
+assert NN1.architecture() == (400,25,10) , 'error in determining architecture in architecture method'
 r = NN1.Train(X,y_mod,1)
 print('training accencury: {}% '.format(((NN1.predict(X)['predict_index'] + 1).reshape(5000,1) == y).mean() * 100))

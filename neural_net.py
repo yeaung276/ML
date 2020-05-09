@@ -131,7 +131,7 @@ class neural_net():
             x0=theta,
             fprime=self.__grad,
             args=(data,y,lam),
-            maxiter=100,
+            maxiter=500,
             full_output=True,
             disp=True,
             callback=self.__callback
@@ -154,7 +154,11 @@ class neural_net():
         self.__iter+=1
 
     def architecture(self):
-        pass
+        art = []
+        for a in self.__activations:
+            i,j = a.shape
+            art.append(i)
+        return tuple(art)
 
     def get_weights(self):
         return self.__weights
@@ -164,7 +168,7 @@ class neural_net():
         return
 
     def get_error(self):
-        pass
+        return self.__J
     
     def get_activations(self):
         return self.__activations
@@ -185,13 +189,18 @@ class neural_net():
         return self.__grad(theta,data,y,lam)
 
 
-class config():
-    pass
 
 
 class training_data():
-    pass
+    def __init__(self,X,y): 
+        self.X = X
+        self.y_ind = y
 
-
+    def to_index_y(self):
+        i = self.y_ind.shape
+        y_mod = np.zeros((np.max(self.y_ind),i))
+        for i,n in enumerate(self.y):
+            y_mod[n-1,i] = 1 
+        self.y_mod = y_mod
 
 
