@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.optimize as op
-
+##return the object of type class at each public method so that series of dot method call can be applied;
+#draw J vs no: of iter graph while tranining
 class neural_net():
     
     def __init__(self,config):

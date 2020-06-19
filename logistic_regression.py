@@ -1,6 +1,6 @@
 import numpy as np
 import scipy.optimize as op
-
+#return the object of type class at each public method so that series of dot method call can be applied;
 class Logistic_regression():
     def __init__(self,no_feature):
         self.__j=0

@@ -7,6 +7,7 @@ mat3 = np.array([[[1,3,4],[2, 4 ,5]],[[1,3,4],[2, 4 ,5]]])
 mat4 = np.array([1,2,3,4,5,6,7,8,9,0,1])
 mat5 = np.array([[1,2,3],[4,5,6],[7,8,9]])
 a = [1,2,3]
+b = np.array([[1,2,3,1,2,3]])
 #net = neural_net.neural_net();
 #print(net.sigmoid(mat));
 #print(mat1)
@@ -47,4 +48,8 @@ a = [1,2,3]
 #for i in range(100):
 #    time.sleep(0.1)
 #    print('Downloading File FooFile.txt [%d] [%d]\r'%(i ,i), end="")
-print(np.max(mat1))
+#print(np.max(mat1))
+#print(np.sum(mat1, axis = 0))
+#print(mat1.argmin(axis = 0))
+#print(np.array(list((np.where(b == 1)))))
+print(np.array((b == 1) * 1))
