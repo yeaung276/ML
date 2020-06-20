@@ -5,7 +5,8 @@ class Cluster():
         n,m = data.shape
         self.data = data
         self.cluster_no = cluster
-        self.cluster_centroids = [np.ones((n,1)) for i in range(cluster)]
+        print(data[:,np.random.randint(0,m)].shape)
+        self.cluster_centroids = [data[:,np.random.randint(0,m)].reshape(n,1) for i in range(cluster)]
 
     def get_distances(self):
         dists=[]
@@ -26,15 +27,16 @@ class Cluster():
             index = np.array((self.__choosen_centroids == i) * 1 )
             avg = np.dot(self.data, index.T)
             avg = avg/np.sum(index)
+           
             self.cluster_centroids[i] = avg
         
     
-    def update(self, iter , func = lambda : None):
+    def update(self, iter , callback = lambda cent : None):
         for i in range(iter):
             self.get_distances()
             self.__get_centroids()
             self.__find_mean()
-            func()
+            callback(self.cluster_centroids)
         return self.cluster_centroids
 
     def destortion_cost(self):

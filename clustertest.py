@@ -9,7 +9,5 @@ X = np.array(datas['X'])
 inst = cluster.Cluster2D(3,X.T)
 assert len(inst.cluster_centroids) == 3, 'error in creating centroid'
 assert inst.cluster_centroids[0].shape == (2,1) , 'error in initializing cluster centroid' #testing centroid dimension
-#inst.plot_data()
-dists = inst.get_distances()
-print(dists.shape)
-inst.update(10)
+
+inst.Cluster(20)
