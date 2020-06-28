@@ -18,7 +18,7 @@ class Cluster():
         self.__dists = np.array(dists)
         return np.array(dists)
 
-    def __get_centroids(self):
+    def get_centroids(self):
         n, m = self.data.shape
         self.__choosen_centroids = self.__dists.argmin(axis = 0).reshape(1,m)
 
@@ -34,7 +34,7 @@ class Cluster():
     def update(self, iter , callback = lambda cent : None):
         for i in range(iter):
             self.get_distances()
-            self.__get_centroids()
+            self.get_centroids()
             self.__find_mean()
             callback(self.cluster_centroids)
         return self.cluster_centroids
