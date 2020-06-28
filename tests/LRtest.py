@@ -1,6 +1,8 @@
 #test code for logistic regression
-import logistic_regression as lc
 import numpy as np
+from importlib.machinery import SourceFileLoader
+
+lc = SourceFileLoader("logistic_regression", "Supervised/logistic_regression.py").load_module()
 
 Lc = lc.Logistic_regression(3)
 

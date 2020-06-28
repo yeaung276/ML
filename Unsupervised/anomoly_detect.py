@@ -1,7 +1,10 @@
-from data import Data
-import scipy.stats 
 
-class Anomoly(Data):
+import scipy.stats 
+from importlib.machinery import SourceFileLoader
+
+data = SourceFileLoader("data", "Utility/data.py").load_module()
+
+class Anomoly(data.Data):
 
     def __init__(self,X):
         n,m = X.shape

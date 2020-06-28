@@ -192,16 +192,6 @@ class neural_net():
 
 
 
-class training_data():
-    def __init__(self,X,y): 
-        self.X = X
-        self.y_ind = y
 
-    def to_index_y(self):
-        i = self.y_ind.shape
-        y_mod = np.zeros((np.max(self.y_ind),i))
-        for i,n in enumerate(self.y):
-            y_mod[n-1,i] = 1 
-        self.y_mod = y_mod
 
 

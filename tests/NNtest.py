@@ -1,7 +1,9 @@
 import scipy as sp
 import scipy.io
 import numpy as np
-import neural_net 
+from importlib.machinery import SourceFileLoader
+
+neural_net = SourceFileLoader("neural_net", "Supervised/neural_net.py").load_module()
 
 weights = sp.io.loadmat('./test_data/nn/ex3weights.mat')
 weight1 = np.array(weights['Theta1'])

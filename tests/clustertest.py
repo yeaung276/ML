@@ -1,7 +1,9 @@
-import cluster2D as cluster
 import scipy as sp
 import numpy as np
 import scipy.io
+from importlib.machinery import SourceFileLoader
+
+cluster = SourceFileLoader("cluster2D", "Unsupervised/cluster2D.py").load_module()
 
 datas = sp.io.loadmat('./test_data/cluster/ex7data2.mat')
 X = np.array(datas['X'])

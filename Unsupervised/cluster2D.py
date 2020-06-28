@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from importlib.machinery import SourceFileLoader
 
-import cluster as cluster
-#TODO: implement K-mean algorithm
+cluster = SourceFileLoader("cluster", "Unsupervised/cluster.py").load_module()
+
 class Cluster2D(cluster.Cluster):
     def __init__(self, cluster, data):
         super().__init__(cluster, data)
