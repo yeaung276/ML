@@ -1,4 +1,4 @@
-import neural_net
+#import neural_net
 import numpy as np
 
 mat1 = np.array([[1,3,4],[2, 4 ,5]])
@@ -54,7 +54,8 @@ b = np.array([[1,2,3,1,2,3]])
 #print(np.array(list((np.where(b == 1)))))
 #print(np.array((b == 1) * 1))
 #print(np.random.randint(0,10))
-X = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
-print(X)
-np.random.shuffle(X)
-print(X)
+#X = np.array([[1,2,3],[4,5,6],[7,8,9],[10,11,12]])
+#print(X)
+#np.random.shuffle(X)
+#print(X)
+print(max(0,1))
