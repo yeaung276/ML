@@ -50,13 +50,15 @@ class Data():
         max_values = np.max(self.data, axis=1, keepdims=True)
         min_values = np.min(self.data, axis=1, keepdims=True)
         values = (self.data - min_values)/(max_values - min_values)
-        return Data(values,m)
+        self.data = values
+        return self
         
     def max_norm(self):
         m = self.m
         max_values = np.max(self.data, axis=1, keepdims=True)
         values = self.data/max_values
-        return Data(values,m)
+        self.data = values
+        return self
     
     def mini_batch(self, batchsize = 1):
         m = self.m

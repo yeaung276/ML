@@ -25,7 +25,7 @@ class linear_layer():
         effect : set activation output as A"""
 
         self.A = activation.Activations(self.Z, function = function)
-        self.A_prime = activation.Activations(self.Z, function = function)
+        self.A_prime = activation.Gradients(self.Z, function = function)
 
     
     def forward_pass(self,X):
